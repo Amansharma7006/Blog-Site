@@ -1,0 +1,304 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+
+<style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 720px;
+  }
+
+</style>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+<ul class="carousel-indicators">
+  <li data-target="#demo" data-slide-to="0" class="active"></li>
+  <li data-target="#demo" data-slide-to="1"></li>
+  <li data-target="#demo" data-slide-to="3"></li>
+  <li data-target="#demo" data-slide-to="4"></li>
+  <li data-target="#demo" data-slide-to="5"></li>
+  <li data-target="#demo" data-slide-to="6"></li>
+
+</ul>
+<div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/h5.jpg'%}" alt="New York" >
+      <div class="carousel-caption">
+
+        <a href="/gym"><h2  onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='#b3f213'" style="color:orange"> Realted Gym And Health Blogs         </h2></a>
+
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/g12.jpg'%}" alt="Los Angeles" >
+      <div class="carousel-caption">
+
+        <a href="/gamming"><h2  onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='#b3f213'" style="color:orange"> Realted Gamming Blogs         </h2></a>
+
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="{% static 'img/bg1.jpg'%}" alt="Los Angeles" >
+      <div class="carousel-caption">
+
+        <a href="/travel"><h2  onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='#b3f213'" style="color:orange"> Realted Travel Blogs         </h2></a>
+
+      </div>
+    </div>
+
+    <div class="carousel-item ">
+      <img src="{% static 'img/s9.jpg'%}" alt="Los Angeles" >
+      <div class="carousel-caption">
+
+        <a href="/sports"><h2  onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='#b3f213'" style="color:orange"> Realted Sports Blogs         </h2></a>
+
+      </div>
+    </div>
+    <div class="carousel-item ">
+      <img src="{% static 'img/business.jpg'%}" alt="Los Angeles" >
+      <div class="carousel-caption">
+
+        <a href="/business"><h2  onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='#b3f213'" style="color:orange"> Realted Business Blogs         </h2></a>
+
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/f1.jpg'%}" alt="Chicago" >
+      <div class="carousel-caption">
+
+        <a href="/food"><h2  onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='#b3f213'" style="color:orange"> Realted Foodiee Blogs         </h2></a>
+
+      </div>
+    </div>
+
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+
+
+    <!-- Intro Section-->
+    <section class="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="h3" style="color:black;font-size:35px;">Basic Introduction</h2>
+            <p class="text-big" style="color:black;font-size:25px;">My  focus on a particular Article, such as <strong>Business, games, sports, or Travel.</strong> Some are more presenting links to all types of other sites. And others are more like personal journals, presenting the author’s daily life and thoughts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="featured-posts no-padding-top">
+      <div class="container">
+        <!-- Post-->
+        {% for obj in object_list %}
+        <div class="row d-flex align-items-stretch">
+          {% if not forloop.first and not forloop.last%}{%if obj.thumbnail%}
+          <div class="image col-lg-5"><img src="{{obj.thumbnail.url}}" alt="..."></div>
+          {% endif %}{%endif%}
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category">
+                    {% for cat in obj.categories.all %}
+                    <a href="#"style="font-weight: bold;color:blue;font-size:15px">{{ cat }}</a></div>
+                    {% endfor %}
+                    <a href="{{post.id}}">
+                    <h2 class="h4" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="font-weight: bold;color:green">{{obj.title}}</h2></a>
+                </header>
+                <p style="font-weight: bold;color:grey">{{obj.overview}}</p>
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+
+
+                {%for obj in auth %}  {%if obj.profile_pic%}
+                    <div class="avatar"><img src="{{ obj.profile_pic.url}}" alt="..." class="img-fluid"></div>
+                  {%endif%}
+                  {%endfor%}
+
+                    <div class="title"><span style="font-weight: bold;color:black;font-size:15px" >Article By: {{obj.author}}</span></div></a>
+                  <div class="date" style="font-weight: bold;color:blue;font-size:15px"><i class="icon-clock"></i>{{obj.timestamp|timesince}} ago</div>
+                  <div class="comments" style="font-weight: bold;color:orange;font-size:15px"><i class="icon-comment"></i>{{ obj.comment_count }}</div>
+
+                </footer>
+                <div class="my-3 fb-like" data-href="http://127.0.0.1:8000/{{post.id}}" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+
+              </div>
+            </div>
+          </div>
+          {% if forloop.first or forloop.last%}{%if obj.thumbnail%}
+          <div class="image col-lg-5"><img src="{{obj.thumbnail.url}}" alt="..."></div>
+          {% endif %}{%endif%}
+        </div>
+        {%endfor%}
+      </div>
+    </section>
+    <!-- Divider Section-->
+<section >
+    <div class="container">
+      <header>
+        <h2 onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="color:black">Categories Of Blogs :</h2>
+        <p class="text-big"></p>
+      </header>
+      <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8">
+          <div class="container">
+            <center><div class="row">
+              <!-- post -->
+              <div class="post col-xl-4">
+                <div class="post-thumbnail"><a href="/travel"><img src="{% static 'img/travel.jpg'%}"  alt="..." class="img-fluid"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last"></div>
+                    <div class="category"><a href="/travel" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="color:green">Travel Blog</a></div>
+                  </div><br><a href="/travel">
+                    <h1 class="h5 btn btn-light btn-sm" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='#f06007'" style="color:orange"> Realted Travel Blog         <i class="fa fa-external-link-square" aria-hidden="true"></i></h1></a>
+                </div>
+              </div>
+              <div class="post col-xl-4">
+                <div class="post-thumbnail"><a href="/gamming"><img src="{% static 'img/game.jpg'%}" width="200" height="150" alt="..." class=""></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last"></div>
+                    <div class="category" ><a href="/gamming" style="color:green">Gamming Blog</a></div>
+                  </div><br><a href="/gamming">
+                    <h3 class="h5 btn btn-light btn-sm" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='#f06007'" style="color:orange" > Realted Gamming Blog          <i class="fa fa-external-link-square" aria-hidden="true"></i></h3></a>
+                </div>
+              </div>
+
+
+              <!-- post -->
+              <div class="post col-xl-4">
+                <div class="post-thumbnail"><a href="/gym"><img src="{% static 'img/gyming.jpg'%}" height="150" alt="..." class=""></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last"></div>
+                    <div class="category"><a href="/gym" style="color:green">Gym And Health Blog</a></div>
+                  </div><br><a href="/gym">
+                    <h3 class="h5 btn btn-light btn-sm" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='#f06007'" style="color:orange"> Realted Gym And Health  Blog         <i class="fa fa-external-link-square" aria-hidden="true"></i></h5></a>
+
+                </div>
+              </div>
+
+              <br><br>
+              <div class="post col-xl-4">
+                <div class="post-thumbnail"><a href="/sports"><img src="{% static 'img/sports.jpg'%}" alt="..." class="img-fluid"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last"></div>
+                    <div class="category"><a href="/sports" style="color:green">Sports Blog</a></div>
+                  </div><br><a href="/sports">
+                    <h3 class="h5 btn btn-light btn-sm" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='#f06007'" style="color:orange"> Realted Sports Blog         <i class="fa fa-external-link-square" aria-hidden="true"></i></h3></a>
+
+                </div>
+              </div>
+              <div class="post col-xl-4">
+                <div class="post-thumbnail"><a href="/business"><img src="{% static 'img/buss.jpeg'%}" alt="..." class="img-fluid"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last"></div>
+                    <div class="category"><a href="/business" style="color:green">Business Blog</a></div>
+                  </div><br><a href="/business">
+          <h3 class="h5 btn btn-light btn-sm" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='#f06007'" style="color:orange"> Realted Business Blog      <i class="fa fa-external-link-square" aria-hidden="true"></i></h3></a>
+
+                </div>
+              </div>
+
+
+              <!-- p
+              ost             -->
+
+              <div class="post col-xl-4">
+                <div class="post-thumbnail"><a href="/food"><img src="{% static 'img/food.jpg'%}" height="140" alt="..." class=""></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last"></div>
+                    <div class="category"><a href="#" style="color:green">Food blog</a></div>
+                  </div><br><a href="/food">
+                    <h3 class="h5 btn btn-light btn-sm" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='#f06007'" style="color:orange"> Realted Food  Blog           <i class="fa fa-external-link-square" aria-hidden="true"></i></h3></a>
+
+                </div>
+              </div>
+
+
+            </div>
+            <!-- Pagination -->
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <div class="widget categories">
+            <header>
+              <h3 class="h5" style="color:green">Categories Post Availabe</h3>
+            </header>
+            {%for cat in category_count%}
+            <div class="item d-flex justify-content-between"><a href="#" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'">{{cat.categories__title}}</a><span>{{cat.categories__title__count}}</span></div>
+            {%endfor%}
+            </div>
+        </aside>
+      </div>
+    </div>
+    </div>
+
+    </section>
+    <!-- Latest Posts -->
+    <section class="featured-posts no-padding-top">
+      <div class="container">
+        <header>
+          <h2 onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'">Latest from the blog :</h2>
+        <br><br>
+          <p class="text-big"></p>
+        </header>
+        <div class="row">
+          {% for obj in latest  %}
+          <div class="post col-md-4">
+            {%if obj.thumbnail%}
+            <div class="post-thumbnail"><a href="{{post.get_absolute_url}}"><img src="{{obj.thumbnail.url}}" width="350px"  height="200px" alt="..." class=""></a></div>
+            {%endif%}
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date" style="font-weight: bold;color:blue;font-size:15px">{{obj.timestamp}}</div>
+                <div class="category">
+                  {%for cat in obj.categories.all%}
+                  <a href="#" style="font-weight: bold;color:blue;font-size:15px">{{cat}}</a></div>
+                  {%endfor%}
+              </div><a href="{{post.get_absolute_url}}">
+                <h3 class="h4" style="font-weight: bold;color:green">{{obj.title}}</h3></a>
+              <p class="text-muted" style="font-weight: bold;color:grey">{{obj.overview |truncatechars:200}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section-->
+
+    <!-- Page Footer-->
+{%endblock content%}

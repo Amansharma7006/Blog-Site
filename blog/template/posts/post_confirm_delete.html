@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+<div class="seimg">
+<section class="portfolio ">
+	<div class="container">
+
+    <form  method="post">
+
+
+    <br><br><br><br><br>
+		<h2 style="color:red">Are You Sure You Want To Delete : <span style="color:blue">{{object.title}}</span></h2>
+		<h2><p style="color:Blue"></p></h2>
+<br>
+<div class="row text-center">
+<div class="col-md-4">
+{%csrf_token%}
+<input type="submit" class="btn btn-danger btn-block btn-lg" value="Delete">
+</div>
+
+<div class="col-md-4">
+
+<h2><a href="/blog" class="btn btn-primary btn-block btn-lg">Save Post  <i class="fa fa-floppy-o" aria-hidden="true"></i></a></h2>
+</div>
+
+</div>
+</form>
+</div>
+</section>
+</div>
+{%endblock content%}

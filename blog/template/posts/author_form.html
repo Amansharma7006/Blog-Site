@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+
+{%load crispy_forms_tags%}
+{%block content%}
+
+<div class="seimg">
+<section class="portfolio ">
+	<div class="container">
+
+<center><h2 style="color:orange">Update our Profile Information </h2></center>
+<br><br><br>
+<form style="color:orange" method="post" enctype="multipart/form-data">
+
+  {%csrf_token%}
+  <div class="row">
+    <div class="col-md-6" style="color:#b3f213">
+      {{u_form|crispy}}
+      {{p_form|crispy}}
+    </div>
+    </div>
+    <br><br><br><br><br>
+    <div class="row">
+    <div class="col-md-6">
+       Update            <i class="fa fa-database" aria-hidden="true"></i><input type="submit" class="btn btn-success btn-block btn-lg">
+    </div>
+		<div class="col-md-6">
+			<br>
+		<a href="/" class="btn btn-danger btn-block btn-lg" ">Back To Home Page <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+
+		</div>
+    </div>
+</form><br><br><br><br>
+
+  </div>
+</section>
+</div>
+{%endblock content%}

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Blog Site</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontastic.css' %}">
+    <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' %}">
+    <link rel="stylesheet" href="{% static 'vendor/@fancyapps/fancybox/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custo.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}">
+    <link rel="stylesheet" href="{% static '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css' %}">
+
+    <link rel="stylesheet" href="{%static 'styles/github.css'%}">
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=1322114514534947&autoLogAppEvents=1"></script>
+
+<style type="text/css">
+	body{
+		background: #eeeeee;
+	}
+    .form-inline {
+        display: inline-block;
+    }
+	.navbar-header.col {
+		padding: 0 !important;
+	}
+	.navbar {
+		background: #fff;
+		padding-left: 16px;
+		padding-right: 16px;
+		border-bottom: 1px solid #d6d6d6;
+		box-shadow: 0 0 4px rgba(0,0,0,.1);
+	}
+	.nav-link img {
+		border-radius: 70%;
+		width: 50px;
+		height: 50px;
+		margin: -8px 0;
+		float: left;
+		margin-right: 10px;
+	}
+	.navbar .navbar-brand {
+		color: #555;
+		padding-left: 0;
+		padding-right: 50px;
+		font-family: 'Merienda One', sans-serif;
+	}
+	.navbar .navbar-brand i {
+		font-size: 20px;
+		margin-right: 5px;
+	}
+	.search-box {
+        position: relative;
+    }
+    .search-box input {
+		box-shadow: none;
+        padding-right: 35px;
+        border-radius: 3px !important;
+    }
+	.search-box .input-group-addon {
+        min-width: 35px;
+        border: none;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        z-index: 9;
+        padding: 7px;
+		height: 100%;
+    }
+    .search-box i {
+        color: #a0a5b1;
+		font-size: 19px;
+    }
+	.navbar .nav-item i {
+		font-size: 18px;
+	}
+	.navbar .dropdown-item i {
+		font-size: 16px;
+		min-width: 22px;
+	}
+	.navbar .nav-item.open > a {
+		background: none !important;
+	}
+	.navbar .dropdown-menu {
+		border-radius: 1px;
+		border-color: #e5e5e5;
+		box-shadow: 0 2px 8px rgba(0,0,0,.05);
+	}
+	.navbar .dropdown-menu li a {
+		color: #777;
+		padding: 8px 20px;
+		line-height: normal;
+	}
+	.navbar .dropdown-menu li a:hover, .navbar .dropdown-menu li a:active {
+		color: #333;
+	}
+	.navbar .dropdown-item .material-icons {
+		font-size: 21px;
+		line-height: 16px;
+		vertical-align: middle;
+		margin-top: -2px;
+	}
+	.navbar .badge {
+		background: #f44336;
+		font-size: 11px;
+		border-radius: 20px;
+		position: absolute;
+		min-width: 10px;
+		padding: 4px 6px 0;
+		min-height: 18px;
+		top: 5px;
+	}
+	.navbar ul.nav li a.notifications, .navbar ul.nav li a.messages {
+		position: relative;
+		margin-right: 10px;
+	}
+	.navbar ul.nav li a.messages {
+		margin-right: 20px;
+	}
+	.navbar a.notifications .badge {
+		margin-left: -8px;
+	}
+	.navbar a.messages .badge {
+		margin-left: -4px;
+	}
+	.navbar .active a, .navbar .active a:hover, .navbar .active a:focus {
+		background: transparent !important;
+	}
+	@media (min-width: 1200px){
+		.form-inline .input-group {
+			width: 300px;
+			margin-left: 30px;
+		}
+	}
+	@media (max-width: 1199px){
+		.form-inline {
+			display: block;
+			margin-bottom: 10px;
+		}
+		.input-group {
+			width: 100%;
+		}
+	}
+
+  body {
+  font-family: 'Lato', sans-serif;
+}
+
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+
+
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.vl {
+  border-right: 6px solid #d4d9d5;
+  height: 600px;
+}
+</style>
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <header class="header">
+      <!-- Main Navbar-->
+      <nav class="navbar navbar-expand-lg">
+        <div class="search-area">
+          <div class="search-area-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn"><i class="icon-close"></i></div>
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-8">
+                <form action="{% url 'search' %}">
+                  <div class="form-group">
+                    <input type="search" name="q" id="search" placeholder="What are you looking for?">
+                    <button type="submit"  class="submit"><i class="icon-search-1"></i></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <!-- Navbar Brand -->
+          <div class="navbar-header d-flex align-items-center justify-content-between">
+            <!-- Navbar Brand -->  <a href="/" class="navbar-brand" style="color:black; font-size:20px">Welcome To My Blog </a>
+            <!-- Toggle Button-->
+            <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
+          </div>
+          <!-- Navbar Menu -->
+          <div id="navbarcollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a href="/"  onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" class="nav-link active " style="color:black; font-size:16px">Home</a>
+              </li>
+              <li class="nav-item"><a href="/blog" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" class="nav-link " style="color:black; font-size:16px">All Blogs</a>
+              </li>
+              <li class="nav-item"><a href="/authorpost" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" class="nav-link " style="color:black; font-size:16px">My Posts</a>
+              </li>
+
+            </ul>
+            <ul class="navbar-nav ml-left">
+              <li class="nav-item"><a href="/signup" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" class="nav-link " style="color:black; font-size:16px">Signup|Login <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+              </li>
+              <ul class="navbar-nav ml-left">
+              <li class="nav-item">
+                {%if request.user.is_authenticated %}
+            <a href="/" data-toggle="dropdown" class="nav-link  user-action" style="color:blue"><img src="{{request.user.author.profile_pic.url}}" class="avatar"  alt="Avatar"> <b class="caret"></b></a>
+
+              {%endif%}
+
+              <li id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+
+<br><br>
+<div class="row">
+
+  <div class="column" style="background-color:transparent;">
+<center><h1 style="color:#13d42a"> User Details Info </h1>
+      <div class="overlay-content">
+  <div class="vl">
+        {%if request.user.is_authenticated%}
+      <div class="post-thumbnail"><a href=""><img src="{{request.user.author.profile_pic.url}}" width=350px; height=350px; alt="..." class="img-fluid rounded-circle"></a></div>
+{%endif%}<br>
+
+        <h3 class="h1"onMouseOver="this.style.color='#b3f213'"
+    onMouseOut="this.style.color='red'" style="font-weight: bold;color:red"><i class="fa fa-user-circle-o" aria-hidden="true"></i>   :  <span style="color:white">  {{user.username}}</span></h3>
+    <br>
+
+          <h3 class="h4"onMouseOver="this.style.color='#b3f213'"
+      onMouseOut="this.style.color='red'" style="font-weight: bold;color:red"><i class="fa fa-envelope" aria-hidden="true"></i>      <span style="color:white"> {{user.email}}</span></h3>
+      <br>
+      <h3 class="h4"onMouseOver="this.style.color='#b3f213'"
+  onMouseOut="this.style.color='red'" style="font-weight: bold;color:red"> First Name :  <span style="color:white">{{user.first_name}}</span> <span style="color:blue">||</span>  <span>Last Name :  <span style="color:white">{{user.last_name}}</span></span></h3>
+  <br>
+  </div>
+    </div>
+</div>
+
+    <div class="column" style="background-color:transparent;">
+      <center><h1 style="color:#13d42a"> Select Options </h1>
+      <br><br><br><br><br><br>
+        <div class="overlay-content">
+      <a href="/authform" onMouseOver="this.style.color='red'"
+  onMouseOut="this.style.color='#b3f213'" style="font-weight: bold;color:#b3f213"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Your Profile Data</a><br>
+  <br>
+  <a href="/accounts/logout" onMouseOver="this.style.color='red'"
+  onMouseOut="this.style.color='#b3f213'" style="font-weight: bold;color:#b3f213" ><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
+    </div>
+      </div>
+</li>
+  {%if request.user.is_authenticated%}
+<span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776; </span>
+  {%endif%}
+</li>
+</ul>
+            </ul>
+            <div class="navbar-text"><a href="{% url 'search' %}" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" class="search-btn" style="color:black; font-size:16px">Search  <i class="icon-search-1"></i></a></div>
+
+
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+<header class="header">
+
+        <div class="container-fluid" style="background-color:black;padding:12px" >
+          <!-- Navbar Brand -->
+          <div class="navbar-header d-flex align-items-center justify-content-between">
+            <!-- Navbar Brand -->
+            <a href="/travel" class="navbar-brand" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="color:white;font-size:20px;font-style:italic;">Travel Blog </a>
+            <a href="/gamming" class="navbar-brand"  onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="color:white;font-size:20px;font-style:italic;">Gamming Blog </a>
+            <a href="/gym" class="navbar-brand"  onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="color:white;font-size:20px;font-style:italic;">Gym and Health Blog</a>
+            <a href="/sports" class="navbar-brand"  onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="color:white;font-size:20px;font-style:italic;">Sports Blog </a>
+            <a href="/business" class="navbar-brand"  onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'" style="color:white;font-size:20px;font-style:italic;">Business Blog </a>
+            <a href="/food" class="navbar-brand " onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='green'"  style="color:white;font-size:20px;font-style:italic;">Foodiee Blog </a>
+            <!-- Toggle Button-->
+
+          </div>
+        </div>
+        </header>
+        {%if messages %}
+          {%for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+          {%endfor%}
+        {%endif%}
+    {%block content%}
+
+    {%endblock content%}
+    <footer class="main-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="logo">
+              <h6 class="text-white">Contact US</h6>
+            </div>
+            <div class="contact-details">
+              <p>64/block Indore</p>
+              <p>Phone: +91-9039604320</p>
+              <p>Email: <a href="#">AmanSharma7066@gmail.com</a></p>
+              <ul class="social-menu">
+                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa fa-behance"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="menus d-flex">
+              <ul class="list-unstyled">
+                <li> <a href="#">My Account</a></li>
+
+                <li> <a href="#">Privacy &amp; Policy</a></li>
+              </ul>
+              <ul class="list-unstyled">
+                <li> <a href="#">Our Partners</a></li>
+                <li> <a href="#">FAQ</a></li>
+                </ul>
+              <ul class="list-unstyled">
+                <li> <a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+      <div class="copyrights">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <center><p>&copy; 2020. All rights reserved.</p>  </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'js/front.js'%}"></script>
+    <script src="{% static 'highlight.pack.js'%}"></script>
+    <script src="{% static '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js' %}"></script>
+    <script src="{% static '/static/base/js/main.js' %}"></script>
+    <script>window.CKEDITOR_BASEPATH = "{% static '/static/ckeditor/ckeditor/' %}";</script>
+    <script>
+function openNav() {
+  document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.height = "0%";
+}
+</script>
+
+
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

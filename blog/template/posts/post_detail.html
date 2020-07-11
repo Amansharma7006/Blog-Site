@@ -1,0 +1,74 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="seimg">
+<section class="featured-posts no-padding-top">
+  <div class="container">
+
+    <!-- Post-->
+<br><br><br><br><center><h1 style="color:white">The Post Details are: </h1></center>
+<br><br><br><br>
+
+    <div class="row d-flex align-items-stretch">{%if object.thumbnail%}
+      <div class="image col-lg-5"><img src="{{object.thumbnail.url}}" alt="..."></div>
+      {%endif%}
+      <div class="text col-lg-7">
+        <div class="text-inner d-flex align-items-center">
+          <div class="content">
+            <header class="post-header">
+              <div class="category">
+                {% for cat in object.categories.all %}
+                <a href="#"style="font-weight: bold;color:blue;font-size:20px">{{ cat }}</a></div>
+                {% endfor %}
+                <a href="post.html">
+                <h2 class="h4"style="font-weight: bold;color:green">{{object.title}}</h2></a>
+            </header>
+            <p style="font-weight: bold;color:grey">{{object.overview}}</p>
+            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+            {%for object in auth%}  {%if object.profile_pic%}
+                <div class="avatar"><img src="{{ object.profile_pic.url}}" alt="..." class="img-fluid"></div>
+                {%endif%}{%endfor%}
+                <div class="title"><span style="font-weight: bold;color:red;font-size:20px">{{object.author}}</span></div></a>
+              <div class="date" style="font-weight:bold;color:blue;font-size:20px"><i class="icon-clock"></i>{{object.timestamp|timesince}} ago</div>
+              <div class="comments" style="font-weight: bold;color:orange;font-size:20px"><i class="icon-comment"></i>{{ object.comment_count }}</div>
+              <a href="{{post.get_absolute_url}}" ><div class="btn btn-sm" onMouseOver="this.style.color='red'"
+  onMouseOut="this.style.color='purple'" style="font-weight: bold;color:purple;font-size:20px">Read Full Post                    <i class="fa fa-info-circle" aria-hidden="true"></i></div></a>
+            </footer>
+
+          </div>
+        </div>
+      </div>
+      {% if forloop.first or forloop.last%}{%if obj.thumbnail%}
+      <div class="image col-lg-5"><img src="{{obj.thumbnail.url}}" alt="..."></div>
+      {% endif %}{%endif%}
+    </div>
+
+        <div class="row">
+          <div class="col-md-4"><br>
+        {%if user.is_authenticated%}
+            {%if user.id == post.author.id %}
+            <h2><a href="/update/{{post.id}}" class="btn btn-success btn-block btn-lg">Edit Post <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></h2>
+            {%endif%}
+        {%endif%}
+        </div>
+        <div class="col-md-4"><br>
+          {%if user.is_authenticated%}
+              {%if user.id == post.author.id %}
+                <h2><a href="/delete/{{post.id}}" class="btn btn-danger btn-block btn-lg">Delete Post <i class="fa fa-trash" aria-hidden="true"></i></a></h2>
+              {%endif%}
+          {%endif%}
+        </div>
+        <div class="col-md-8">
+      <br>
+      {%if user.is_authenticated%}
+          {%if user.id == post.author.id %}
+            <h2><a href="/blog" class="btn btn-primary btn-block btn-lg">View Posts <i class="fa fa-eye" aria-hidden="true"></i></a></h2>
+          {%endif%}
+      {%endif%}
+    </div>
+</div>
+</div>
+
+</section>
+  </div>
+{%endblock content%}

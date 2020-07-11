@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8">
+          <div class="container">
+            <div class="row">
+              <!-- post -->
+
+              {%for post in queryset%}
+              <div class="post col-xl-6">
+                <div class="post-thumbnail"><a href="/{{post.id}}"><img src="{{post.thumbnail.url}}" width="350" height="250" alt="..." class=""></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last">
+                      <a href="#" class="author d-flex align-items-center flex-wrap">
+                          <div class="title"> <span style="font-weight: bold;color:black;font-size:20px">Article By: {{post.author}}</span></div></a>
+                    </div>
+                    {%for cat in post.categories.all %}
+                    <div class="category"><a href="#"style="font-weight:bold;color:blue;font-size:15px">{{cat}}</a></div>
+                    {%endfor%}
+                  </div><a href="/{{post.id}}">
+                    <center><h2 class="h5" onMouseOver="this.style.color='red'"
+        onMouseOut="this.style.color='blue'" style="font-weight: bold;color:green">{{post.title}}</h2></a>                  <span style="font-weight: bold;color:red">({{post.status}})</span>               <i class="fa fa-check-square" aria-hidden="true"></i>
+        <a href="/{{post.id}}" ><div class="btn btn-sm" onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='purple'" style="font-weight: bold;color:purple;font-size:20px">More Details                    <i class="fa fa-info-circle" aria-hidden="true"></i></div></a>
+
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                {% if queryset.has_previous %}
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                  {%endif%}
+
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.number}}" class="page-link active">{{queryset.number}}</a></li>
+
+                {% if queryset.has_next %}
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.next_page_number}}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {%endif%}
+              </ul>
+            </nav>
+          </div>
+        </main>
+        {% include 'aside.html' with most_recent=most_recent category_count=category_count %}
+      </div>
+    </div>
+    <!-- Page Footer-->
+{%endblock content%}

@@ -1,0 +1,21 @@
+/* your styles g/* your styles go here */
+.seimg{
+  background-image: url(divider-bg.jpg);
+  background-size: 100% 100%;
+	width: 100%;
+	height: 900px;
+
+}
+.peimg{
+  background-image: url(bg2.jpg);
+  background-size: 100% 100%;
+	width: 100%;
+	height: 700px;
+
+}
+hr.rounded {
+  border-top: 3px solid orange;
+
+  text-align: center;
+
+}

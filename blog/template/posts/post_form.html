@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+
+{%load crispy_forms_tags%}
+{%block content%}
+
+<div class="seimg">
+<section class="portfolio ">
+	<div class="container">
+<center>		<h2 style="color:#138af2">Insert Details Of Post</h2></center>
+
+<br><br>
+
+<form style="color:white" method="post" enctype="multipart/form-data">
+{%if user.is_authenticated%}
+  {%csrf_token%}
+  <div class="row">
+    <div class="col-md-4" style="color:#b3f213">
+				<h3 style="color:#b3f213">Enter Title</h3>
+        {{form.title|as_crispy_field}}
+    </div><br>
+		<div class="col-md-4" style="color:#b3f213">
+				<h3 style="color:#b3f213">Select STATUS</h3>
+        {{form.status|as_crispy_field}}
+    </div><br>
+
+  </div>
+	  <div class="row">
+			<div class="col-md-5" style="color:#b3f213">
+					<h3 style="color:#b3f213"> Enter Overview</h3>
+				{{form.overview|as_crispy_field}}
+			</div>
+			<div class="col-md-7" style="color:#b3f213">
+			<h3 style="color:#b3f213">{{ title }} An article</h3>
+			{{form.content|safe}}
+			{{ form.media}}
+			</div>
+	</div>
+  
+    <div class="row">
+      <div class="col-md-4" style="color:#b3f213">
+				<div class="col-md-2" style="color:#b3f213">
+					<input type="hidden" name="author" value="" class="select form-control" id="id_author">
+				</div>
+				<br>
+					<h3 style="color:#b3f213">Select Thumbnail </h3>
+        {{form.thumbnail|as_crispy_field}}
+      </div>
+      <div class="col-md-6" style="color:#b3f213">
+				<br>
+					<h3 style="color:#b3f213">Select Category </h3>
+        {{form.categories|as_crispy_field}}
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-md-2" style="color:#b3f213">
+				<h3 style="color:#b3f213"> </h3>
+      {{form.featured|as_crispy_field}}
+    </div>
+    </div><br>
+      <div class="row">
+    <div class="col-md-6" style="color:#b3f213">
+      <label style="color:#b3f213">Click To Submit</label>
+      <i class="fa fa-database" aria-hidden="true"></i><input type="submit" class="btn btn-success btn-block btn-lg" value="Insert/Update">
+    </div>
+    </div>
+	{%endif%}
+</form>
+<script>
+	var name="{{user.id}}";
+	document.getElementById("id_author").value = name;
+</script>
+
+  </div>
+</section>
+</div>
+
+{%endblock%}

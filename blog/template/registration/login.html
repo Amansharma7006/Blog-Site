@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+
+{%load crispy_forms_tags%}
+{%block content%}
+
+<div class="seimg">
+<section class="portfolio ">
+	<div class="container"><br><br>
+<h2 style="color:red">LOGIN FORM <i class="fa fa-sign-in" aria-hidden="true"></i></h2>
+
+<br><br>
+<br>
+
+<center>
+<form style="color:white" method="post">
+
+  {%csrf_token%}
+  <div class="row" >
+    <div class="col-md-5 ">
+      {{form.username|as_crispy_field}}
+    </div>
+    <br>
+    <div class="col-md-5">
+      {{form.password|as_crispy_field}}
+    </div>
+    <br>
+		<br><br><br><br><br><br><br>
+    <div class="col-md-8">
+      <label>Click To Submit</label><button type="submit" class="btn btn-success btn-block btn-lg" >Submit <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
+</form>
+</center>
+</div>
+</section>
+</div>
+
+{%endblock content%}

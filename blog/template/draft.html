@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+
+        <main class="posts-listing col-lg-8">
+          <center><h2 style="color:purple">This is Draft Posts</h2></center>
+          <br><br>
+          <div class="container">
+
+            <div class="row">
+              <!-- post -->
+              {%for post in auth %}
+              
+              <div class="post col-xl-9">
+                <div class="post-thumbnail"><a href="{{post.get_absolute_url}}"><img src="{{post.thumbnail.url}}" alt="..." class="img-fluid"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last">
+                      <a href="#" class="author d-flex align-items-center flex-wrap">
+
+                          <div class="title"><span style="font-weight: bold;color:red;font-size:20px">Article By: {{post.author}}</span></div></a>
+                    </div>
+                    {%for cat in post.categories.all %}
+                    <div class="category"><a href="#"style="font-weight:bold;color:blue;font-size:15px">{{cat}}</a></div>
+                    {%endfor%}
+                  </div><a href="/{{post.id}}">
+                    <h3 class="h5" style="font-weight: bold;color:green">{{post.title}}</h3></a>
+                       <span style="font-weight: bold;color:blue">({{post.status}})</span>
+                       <i class="fa fa-check-square" aria-hidden="true"></i>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                {% if queryset.has_previous %}
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                  {%endif%}
+
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.number}}" class="page-link active">{{queryset.number}}</a></li>
+
+                {% if queryset.has_next %}
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.next_page_number}}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {%endif%}
+              </ul>
+            </nav>
+
+          </div>
+          <div class="row">
+        <div class="col-md-4">
+          <center><h2> <a href="/authorpost" class="btn btn-success btn-block btn-lg" ">Back To Post Page <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+          </h2>
+          </div>
+        </div>
+        </main>
+
+        {% include 'aside.html' with most_recent=most_recent category_count=category_count %}
+      </div>
+    </div>
+    <!-- Page Footer-->
+{%endblock content%}

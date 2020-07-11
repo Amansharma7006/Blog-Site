@@ -1,0 +1,80 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <div class="container">
+      <div class="row">
+
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-12">
+
+
+          <div class="container">
+            <div class="row">
+          <div class="col-md-5">
+            <center><h2 class="h6">Draft Posts <a href="/draft" onMouseOver="this.style.color='white'"
+onMouseOut="this.style.color='black'" class="btn btn-outline-danger  btn-lg" ">My Draft Post <i class="fa fa-sign-in" aria-hidden="true"></i></a></h2>
+              </div>
+          <div class="col-md-5">
+
+                <h3 class="h6">Add More Posts   <a href="/pcreate" class="btn btn-outline-success btn-lg">Add New Post                      <i class="fa fa-plus-square" aria-hidden="true"></i></a></h3>
+
+              </div>
+
+          </div><br><br>
+          <center><h2 style="color:purple">This is Gym And Health Blog Posts</h2></center>
+          <br><br>
+          <br>
+            <div class="row">
+              <!-- post -->
+              {%for post in sports %}
+
+              <div class="post col-xl-4">
+                <div class="post-thumbnail"><a href="/{{post.id}}"><img src="{{post.thumbnail.url}}" width="350" height="200" alt="..." class=""></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last">
+                      <a href="#" class="author d-flex align-items-center flex-wrap">
+                          <div class="title"><span style="font-weight: bold;color:black;font-size:20px">Article By: {{post.author}}</span></div></a>
+                    </div>
+                    {%for cat in post.categories.all %}
+                    <div class="category"><a href="#"style="font-weight:bold;color:blue;font-size:15px">{{cat}}</a></div>
+                    {%endfor%}
+                  </div><a href="/{{post.id}}">
+                    <h3 class="h5" onMouseOver="this.style.color='purple'"
+        onMouseOut="this.style.color='green'" style="font-weight: bold;color:green">{{post.title}}</h3></a>             <span style="font-weight: bold;color:blue">({{post.status}})</span>             <i class="fa fa-check-square" aria-hidden="true"></i>
+
+        <a href="/{{post.id}}" ><div class="btn btn-sm" onMouseOver="this.style.color='red'"
+onMouseOut="this.style.color='purple'" style="font-weight: bold;color:purple;font-size:20px">More Details                    <i class="fa fa-info-circle" aria-hidden="true"></i></div></a>
+
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                {% if queryset.has_previous %}
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                  {%endif%}
+
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.number}}" class="page-link active">{{queryset.number}}</a></li>
+
+                {% if queryset.has_next %}
+                <li class="page-item"><a href="?{{page_request_var}}={{queryset.next_page_number}}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {%endif%}
+              </ul>
+            </nav>
+            <div class="row">
+          <div class="col-md-4">
+            <center><h2> <a href="/" onMouseOver="this.style.color='cyan'"
+onMouseOut="this.style.color='white'" class="btn btn-danger btn-block btn-lg" ">Back To Home <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+            </h2>
+            </div>
+          </div>
+          </div>
+        </main>
+
+      </div>
+    </div>
+    <!-- Page Footer-->
+{%endblock content%}
